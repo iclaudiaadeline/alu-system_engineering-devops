@@ -1,6 +1,21 @@
+# Install ufw if not already installed
+sudo apt-get -y update
+sudo apt-get -y install ufw
+
+# Disable UFW temporarily to ensure clean setup
+sudo ufw disable
+sudo systemctl stop ufw
+
+# Set default rules
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow 22
-sudo ufw allow 443
-sudo ufw allow 80
+
+# Allow necessary ports
+sudo ufw allow 22/tcp   # SSH
+sudo ufw allow 443/tcp  # HTTPS
+sudo ufw allow 80/tcp   # HTTP
+sudo ufw allow 143/tcp  # IMAP (if needed)
+
+# Enable the firewall
+sudo ufw enable
 
